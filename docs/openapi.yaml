@@ -1,0 +1,565 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  contact:
+    email: latusikl@gmail.com
+  title: Sample service
+  description: This is a specification of the API that is provided by a sample service that will be used to compare performance between JAR and Native Image deployments.
+servers:
+  - url: http://{address}:{port}/{prefix}
+    variables:
+      address:
+        description: "Domain or the IP address of the deployed service that implements specified API."
+        default: "localhost"
+      port:
+        description: "The port on which the service is available."
+        default: "8069"
+      prefix:
+        description: "Common endpoints prefix"
+        default: api
+tags:
+  - name: Sorting
+    description: Sort array of integers using different sorting algorithms.
+  - name: Item
+    description: Manage library items.
+  - name: Item Stock
+    description: Manage stock of library items.
+  - name: Members
+    description: Manage library members.
+  - name: Borrow
+    description: Manage item borrowings.
+paths:
+  /sort/sorters:
+    post:
+      tags:
+        - Sorting
+      summary: Send array of integer to sort using specified strategy.
+      parameters:
+        - name: direction
+          in: query
+          required: false
+          description: Allows to choose sorting direction.
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+            default: ASCENDING
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SortingRequestDto"
+      responses:
+        '200':
+          description: Sorted array of passed values.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SortingResponseDto"
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+  /items:
+    post:
+      tags:
+        - Item
+      summary: Create item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemDto"
+      responses:
+        '200':
+          description: OK
+          headers:
+            Location:
+              description: URL with resource location
+              schema:
+                type: string
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+    get:
+      tags:
+        - Item
+      summary: Fetch all items
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemDto'
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+  /item/{id}:
+    get:
+      tags:
+        - Item
+      summary: Retrieve item data
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemDto"
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    delete:
+      tags:
+        - Item
+      summary: Delete item
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '204':
+          description: NO CONTENT
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+          
+  /stocks:
+    post:
+      tags:
+        - Item Stock
+      summary: Create stock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemStock4PostDto"
+      responses:
+        '200':
+          description: OK
+          headers:
+            Location:
+              description: URL with resource location
+              schema:
+                type: string
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    get:
+      tags:
+        - Item Stock
+      summary: Fetch all stocks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemStock4GetDto'
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+        
+  /stocks/{id}:
+    get:
+      tags:
+        - Item Stock
+      summary: Retrieve item data
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemStock4GetDto"
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    delete:
+      tags:
+        - Item Stock
+      summary: Delete item
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '204':
+          description: NO CONTENT
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+          
+  /members:
+    post:
+      tags:
+        - Members
+      summary: Create member.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberDto"
+      responses:
+        '200':
+          description: OK
+          headers:
+            Location:
+              description: URL with resource location
+              schema:
+                type: string
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    get:
+      tags:
+        - Members
+      summary: Fetch all members.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberDto'
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+  /members/{id}:
+    get:
+      tags:
+        - Members
+      summary: Retrieve member data
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberDto"
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    delete:
+      tags:
+        - Members
+      summary: Delete member
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '204':
+          description: NO CONTENT
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+
+  /borrowings:
+    post:
+      tags:
+        - Borrow
+      summary: Create borrowing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Borrow4PostDto"
+      responses:
+        '200':
+          description: OK
+          headers:
+            Location:
+              description: URL with resource location
+              schema:
+                type: string
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    get:
+      tags:
+        - Borrow
+      summary: Fetch all borrowings.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrow4GetDto'
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+  /borrowings/{id}:
+    get:
+      tags:
+        - Borrow
+      summary: Retrieve borrwing details
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Borrow4GetDto"
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+    delete:
+      tags:
+        - Borrow
+      summary: Delete borrowing
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      responses:
+        '204':
+          description: NO CONTENT
+        4XX:
+          $ref: "#/components/responses/default"
+        5XX:
+          $ref: "#/components/responses/default"
+
+
+components:
+  
+  schemas:
+    SortingRequestDto:
+          type: object
+          required:
+            - data
+            - strategy
+          properties:
+            data:
+              type: array
+              items:
+                type: integer
+                format: int64
+            strategy:
+              type: string
+              enum:
+                - QUICKSORT
+                - MERGE_SORT
+                - HEAP_SORT
+          example:
+            data: [50, -100, 200, 69, 17]
+            strategy: QUICKSORT
+            
+    SortingResponseDto:
+      type: object
+      required:
+        - sortedData
+      properties:
+        sortedData:
+          type: array
+          items:
+            type: integer
+            format: int64
+      example:
+        sortedData: [-100, 17, 50, 69, 200]
+    
+    ItemDto:
+      type: object
+      required:
+        - name
+        - authorName
+        - authorSurname
+        - publicationYear
+      properties:
+        name:
+          type: string
+        authorName:
+          type: string
+        authorSurname:
+          type: string
+      example:
+        name: Clean Code
+        authorName: Robert
+        authorSurname: Martin
+        publicationYear: 2008
+        
+    ItemStock4PostDto:
+      type: object
+      required:
+        - itemId
+        - itemCount
+      properties:
+        itemId:
+          type: string
+          format: uuid
+        itemCount:
+          type: number
+      example:
+        itemId: 2e16e565-839a-46e7-b38f-ef4e1958d28b
+        itemCount: 10
+    
+    ItemStock4GetDto:
+      type: object
+      properties:
+        itemId:
+          type: string
+          format: uuid
+        itemCount:
+          type: number
+        availableItemsCount:
+          type: number
+        borrowedItemsCount:
+          type: number
+      example:
+        itemId: 2e16e565-839a-46e7-b38f-ef4e1958d28b
+        itemCount: 10 
+        availableItemsCount: 7
+        borrowedItemsCount: 3
+        
+    MemberDto:
+      type: object
+      required:
+        - name
+        - surname
+        - email
+        - idCardKey
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        idCardKey: 
+          type: string
+      example:
+        name: John
+        surname: Doe
+        email: john.doe@test.com
+        idCardKey: CGB224551
+        
+    Borrow4PostDto:
+      type: object
+      required:
+        - memberId
+        - itemId
+      properties:
+        memberId:
+          type: string
+          format: uuid
+        itemId:
+          type: string
+          format: uuid 
+      example:
+        memberId: 8d1704d0-9877-4693-a51e-5dab3c1eb68d
+        itemId: 28b7513f-e2dd-49fe-9ac6-02077f1692bf   
+        
+    Borrow4GetDto:
+      type: object
+      required:
+        - memberId
+        - itemId
+      properties:
+        memberId:
+          type: string
+          format: uuid
+        itemId:
+          type: string
+          format: uuid 
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      example:
+        memberId: 8d1704d0-9877-4693-a51e-5dab3c1eb68d
+        itemId: 28b7513f-e2dd-49fe-9ac6-02077f1692bf     
+        
+    ValidationError:
+      type: object
+      required:
+        - object
+        - error
+      properties:
+        object:
+          type: string
+        error:
+          type: string
+          
+    Error:
+      type: object
+      required:
+        - message
+        - serverTime
+      properties:
+        message:
+          type: string
+        serverTime:
+          type: string
+          format: date-time
+        additionalInformation:
+          type: string
+        validationErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+        
+  parameters:
+    idParam:
+      name: id
+      in: path
+      description: UUID of the user that the given operation conecers.
+      required: true
+      schema:
+        type: string
+        format: uuid
+  
+  responses:
+    default:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
