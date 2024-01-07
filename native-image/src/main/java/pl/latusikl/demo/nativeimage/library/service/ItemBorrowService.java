@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.latusikl.demo.nativeimage.library.dto.ItemBorrowDto;
 import pl.latusikl.demo.nativeimage.library.entity.ItemBorrow;
-import pl.latusikl.demo.nativeimage.library.exception.BadRequestException;
+import pl.latusikl.demo.nativeimage.exception.BadRequestException;
 import pl.latusikl.demo.nativeimage.library.service.repository.ItemBorrowRepository;
 
 @Service

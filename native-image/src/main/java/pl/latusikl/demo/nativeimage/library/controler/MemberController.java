@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.latusikl.demo.nativeimage.library.dto.MemberDto;
 import pl.latusikl.demo.nativeimage.library.entity.Member;
-import pl.latusikl.demo.nativeimage.library.exception.BadRequestException;
-import pl.latusikl.demo.nativeimage.library.service.ItemService;
+import pl.latusikl.demo.nativeimage.exception.BadRequestException;
 import pl.latusikl.demo.nativeimage.library.service.MemberService;
 
 @RestController

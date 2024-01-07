@@ -2,21 +2,16 @@ package pl.latusikl.demo.nativeimage.library.service;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.xml.stream.events.DTD;
-
 import org.springframework.core.convert.ConversionService;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import pl.latusikl.demo.nativeimage.library.dto.ItemDto;
 import pl.latusikl.demo.nativeimage.library.dto.ItemStockDto;
 import pl.latusikl.demo.nativeimage.library.entity.Item;
 import pl.latusikl.demo.nativeimage.library.entity.ItemStock;
-import pl.latusikl.demo.nativeimage.library.exception.BadRequestException;
+import pl.latusikl.demo.nativeimage.exception.BadRequestException;
 import pl.latusikl.demo.nativeimage.library.service.repository.ItemRepository;
 import pl.latusikl.demo.nativeimage.library.service.repository.ItemStockRepository;
 

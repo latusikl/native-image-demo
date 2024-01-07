@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.latusikl.demo.nativeimage.library.dto.BaseDto;
 import pl.latusikl.demo.nativeimage.library.entity.BaseEntity;
-import pl.latusikl.demo.nativeimage.library.exception.InternalServerErrorException;
+import pl.latusikl.demo.nativeimage.exception.InternalServerErrorException;
 
 public abstract class AbstractEntityService<ENTITY extends BaseEntity, DTO extends BaseDto> implements CRUDService<ENTITY, DTO>
 {

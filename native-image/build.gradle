@@ -1,9 +1,11 @@
 plugins {
     id 'java'
+    id 'groovy'
     id 'org.springframework.boot' version '3.2.1'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'org.hibernate.orm' version '6.4.1.Final'
     id 'org.graalvm.buildtools.native' version '0.9.28'
+    id 'com.adarshr.test-logger' version '3.1.0'
 }
 
 group = 'pl.latusikl.demo'
@@ -32,9 +34,10 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation('org.spockframework:spock-core:2.3-groovy-4.0')
-    testImplementation('org.spockframework:spock-spring:2.3-groovy-4.0')
+
+    testImplementation 'org.apache.groovy:groovy-all:4.0.17'
+    testImplementation'org.spockframework:spock-core:2.3-groovy-4.0'
+    testImplementation'org.spockframework:spock-spring:2.3-groovy-4.0'
 }
 
 tasks.named('test') {
@@ -45,5 +48,9 @@ hibernate {
     enhancement {
         enableAssociationManagement = true
     }
+}
+
+bootJar {
+    archiveFileName = "${rootProject.name}.jar"
 }
 

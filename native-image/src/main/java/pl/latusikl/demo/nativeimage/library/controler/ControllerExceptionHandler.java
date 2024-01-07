@@ -18,7 +18,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import pl.latusikl.demo.nativeimage.library.dto.ErrorResponseDto;
 import pl.latusikl.demo.nativeimage.library.dto.ValidationErrorDto;
-import pl.latusikl.demo.nativeimage.library.exception.AbstractRuntimeException;
+import pl.latusikl.demo.nativeimage.exception.AbstractRuntimeException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler

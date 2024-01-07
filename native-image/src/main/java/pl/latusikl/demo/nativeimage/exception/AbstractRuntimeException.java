@@ -1,4 +1,4 @@
-package pl.latusikl.demo.nativeimage.library.exception;
+package pl.latusikl.demo.nativeimage.exception;
 
 import org.springframework.http.HttpStatus;
 
