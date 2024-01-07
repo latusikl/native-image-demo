@@ -1,7 +1,8 @@
 package pl.latusikl.demo.nativeimage.sorting.services.sorters;
 
 import org.springframework.stereotype.Component;
-import pl.latusikl.sorting.services.models.SortingStrategy;
+
+import pl.latusikl.demo.nativeimage.sorting.services.models.SortingStrategy;
 
 @Component
 public class Quicksort implements Sorter {
