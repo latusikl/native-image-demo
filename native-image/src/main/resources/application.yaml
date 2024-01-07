@@ -1,0 +1,11 @@
+server:
+  port: 8069
+  servlet:
+    context-path: /api
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+library:
+    default-borrowing-length-days: 20
