@@ -29,8 +29,8 @@ on:
       - "!native-image/gralde/**"
       - "!native-image/graldew.bat"
 env:
-  JAVA_VERSION: ${{ inputs.java-version }}
-  GRADLE_VERSION: ${{ inputs.gradle.version }}
+  JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
+  GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle.version || 'wrapper' }}
   PROJECT_DIR: 'native-image'
 jobs:
   build-and-test:
