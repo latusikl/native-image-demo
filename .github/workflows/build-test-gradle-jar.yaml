@@ -41,7 +41,7 @@ jobs:
         run:  | 
           echo "Java Version: $JAVA_VERSION"
           echo "Gradle Version: $GRADLE_VERSION"
-          echo "Project dir: $PROJECT_DIF"
+          echo "Project dir: $PROJECT_DIR"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up JDK ${{ env.JAVA_VERSION }}
