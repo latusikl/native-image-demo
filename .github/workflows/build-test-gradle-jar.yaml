@@ -10,8 +10,8 @@ on:
       gradle-version:
         description: 'Gradle version that will be used during the build'
         required: false
-        default: 8.5
-        type: number
+        default: 'wrapper'
+        type: string
       java-version:
         description: 'Java version that will be used during the build'
         required: false
