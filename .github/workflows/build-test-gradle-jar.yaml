@@ -1,0 +1,60 @@
+name: Build and test
+on:
+  workflow_dispatch:
+    inputs:
+      application-dir:
+        description: 'Subdirectory that contains the application'
+        required: true
+        type: string
+        default: native-image
+      gradle-version:
+        description: 'Gradle version that will be used during the build'
+        required: false
+        default: 8.5
+        type: number
+      java-version:
+        description: 'Java version that will be used during the build'
+        required: false
+        default: '21'
+        type: string
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - develop
+      - feature/*
+    paths:
+      - ".github/workflows/build-test-gradle-jar.yml"
+      - "${{ inputs.application-dir }}/**"
+      - "!${{ inputs.application-dir }}/README.md"
+      - "!/gralde/**"
+      - "!${{ inputs.application-dir }}/graldew.bat"
+      - "!${{ inputs.application-dir }}/graldew"
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: 'temurin'
+      - name: Build project
+        uses: gradle/gradle-build-action@v2
+        with:
+            gradle-version: ${{ inputs.gradle.version }}
+            arguments: build -x test
+            build-root-directory: ${{ inputs.application-dir }}
+      - name: Execute tests
+        uses: gradle/gradle-build-action@v2
+        with:
+            gradle-version: ${{ inputs.gradle.version }}
+            arguments: test
+            build-root-directory: ${{ inputs.application-dir }}
