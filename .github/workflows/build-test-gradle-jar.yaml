@@ -29,11 +29,7 @@ on:
       - feature/*
     paths:
       - ".github/workflows/build-test-gradle-jar.yaml"
-      - "${{ inputs.application-dir }}/**"
-      - "!${{ inputs.application-dir }}/README.md"
-      - "!/gralde/**"
-      - "!${{ inputs.application-dir }}/graldew.bat"
-      - "!${{ inputs.application-dir }}/graldew"
+      -  ${{ inputs.application-dir }}/**
 jobs:
   build-and-test:
     name: Build and Test
@@ -41,12 +37,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ inputs.java-version }}
         uses: actions/setup-java@v2
         with:
           java-version: ${{ inputs.java-version }}
           distribution: 'temurin'
-      - name: Build project
+      - name: Build project with Gradle ${{ inputs.gradle-version }} 
         uses: gradle/gradle-build-action@v2
         with:
             gradle-version: ${{ inputs.gradle.version }}
