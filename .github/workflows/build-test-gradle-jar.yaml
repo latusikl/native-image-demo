@@ -28,27 +28,36 @@ on:
       - "!native-image/README.md"
       - "!native-image/gralde/**"
       - "!native-image/graldew.bat"
+env:
+  JAVA_VERSION: ${{ inputs.java-version }}
+  GRADLE_VERSION: ${{ inputs.gradle.version }}
+  PROJECT_DIR: 'native-image'
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-22.04
     steps:
+      - name: Environment Setup
+        run:  | 
+          echo "Java Version: $JAVA_VERSION"
+          echo "Gradle Version: $GRADLE_VERSION"
+          echo "Project dir: $PROJECT_DIF"
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up JDK ${{ inputs.java-version }}
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ inputs.java-version }}
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
-      - name: Build project with Gradle ${{ inputs.gradle-version }} 
+      - name: Build project
         uses: gradle/gradle-build-action@v2
         with:
-            gradle-version: ${{ inputs.gradle.version }}
+            gradle-version: ${{ env.GRADLE_VERSION }}
             arguments: build -x test
-            build-root-directory: ${{ inputs.application-dir }}
-      - name: Execute tests
+            build-root-directory: ${{ env.PROJECT_DIR }}
+      - name: Run tests
         uses: gradle/gradle-build-action@v2
         with:
-            gradle-version: ${{ inputs.gradle.version }}
+            gradle-version: ${{ env.GRADLE_VERSION }}
             arguments: test
-            build-root-directory: ${{ inputs.application-dir }}
+            build-root-directory: ${{ env.PROJECT_DIR }}
