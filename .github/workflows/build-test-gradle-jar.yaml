@@ -2,11 +2,6 @@ name: Build and test
 on:
   workflow_dispatch:
     inputs:
-      application-dir:
-        description: 'Subdirectory that contains the application'
-        required: true
-        type: string
-        default: native-image
       gradle-version:
         description: 'Gradle version that will be used during the build'
         required: false
@@ -29,7 +24,10 @@ on:
       - feature/*
     paths:
       - ".github/workflows/build-test-gradle-jar.yaml"
-      -  ${{ inputs.application-dir }}/**
+      -  "native-image/**"
+      - "!native-image/README.md"
+      - "!native-image/gralde/**"
+      - "!native-image/graldew.bat"
 jobs:
   build-and-test:
     name: Build and Test
