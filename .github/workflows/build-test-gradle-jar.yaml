@@ -28,7 +28,7 @@ on:
       - develop
       - feature/*
     paths:
-      - ".github/workflows/build-test-gradle-jar.yml"
+      - ".github/workflows/build-test-gradle-jar.yaml"
       - "${{ inputs.application-dir }}/**"
       - "!${{ inputs.application-dir }}/README.md"
       - "!/gralde/**"
