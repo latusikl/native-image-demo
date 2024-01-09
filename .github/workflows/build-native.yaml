@@ -39,8 +39,8 @@ jobs:
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: $JAVA_VERSION
-          distribution: $GRAAL_DISTRO
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.GRAAL_DISTRO }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           set-java-home: true
           components: 'native-image'
