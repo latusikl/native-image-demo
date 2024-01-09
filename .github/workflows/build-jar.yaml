@@ -46,9 +46,8 @@ jobs:
             build-root-directory: ${{ env.PROJECT }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
-        with: ${{ env.PROJECT }}
-          name: native-image.jar
+        with:
+          name: ${{ env.PROJECT }}.jar
           path: ${{ env.PROJECT }}/build/libs/${{ env.PROJECT }}.jar
           if-no-files-found: error
-          retention-days: 5
-          
+          # retention-days: 5
