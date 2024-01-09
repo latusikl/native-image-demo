@@ -12,22 +12,6 @@ on:
         required: false
         default: '21'
         type: string
-  pull_request:
-    types:
-      - opened
-    branches:
-      - main
-      - develop
-  push:
-    branches:
-      - develop
-      - feature/*
-    paths:
-      - ".github/workflows/build-jar.yaml"
-      -  "native-image/**"
-      - "!native-image/README.md"
-      - "!native-image/gralde/**"
-      - "!native-image/graldew.bat"
 env:
   JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
   GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle.version || 'wrapper' }}
