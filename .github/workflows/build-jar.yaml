@@ -4,17 +4,17 @@ on:
     inputs:
       gradle-version:
         description: 'Gradle version that will be used during the build'
-        required: false
+        required: true
         default: 'wrapper'
         type: string
       java-version:
         description: 'Java version that will be used during the build'
-        required: false
+        required: true
         default: '21'
         type: string
       project:
         description: 'Name of the project that corresponds to directory and JAR file name'
-        required: false
+        required: true
         default: 'demo-app'
         type: string
 env:
