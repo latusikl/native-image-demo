@@ -17,10 +17,16 @@ on:
         required: true
         default: 'demo-app'
         type: string
+      gradle-version:
+        description: 'Gradle version that will be used during the build'
+        required: true
+        default: 'wrapper'
+        type: string
 env:
   JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
   GRAAL_DISTRO: ${{ github.event_name == 'workflow_dispatch' && inputs.graal-distro || 'graalvm-community' }}
   PROJECT: ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'demo-app' }}
+  GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle-version || 'wrapper' }}
 jobs:
   build-native:
     name: Build GraalVM Native Image on ${{ matrix.os }}
@@ -43,10 +49,13 @@ jobs:
           distribution: ${{ env.GRAAL_DISTRO }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           set-java-home: true
-          components: 'native-image'
           native-image-job-reports: 'true'
       - name: Build native-image for ${{ matrix.os }}
-        run: ./gradlew nativeCompile --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+            gradle-version: ${{ env.GRADLE_VERSION }}
+            arguments: nativeCompile --no-daemon
+            build-root-directory: ${{ env.PROJECT }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
