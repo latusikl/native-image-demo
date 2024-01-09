@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: native-image.jar
-          path: build/libs/native-image.jar
+          path: ${{ env.PROJECT_DIR }}/build/libs/native-image.jar
           if-no-files-found: error
           retention-days: 5
           
