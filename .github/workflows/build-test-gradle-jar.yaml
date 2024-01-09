@@ -24,14 +24,14 @@ on:
       - feature/*
     paths:
       - ".github/workflows/build-test-gradle-jar.yaml"
-      -  "native-image/**"
-      - "!native-image/README.md"
-      - "!native-image/gralde/**"
-      - "!native-image/graldew.bat"
+      -  "demo-app/**"
+      - "!demo-app/README.md"
+      - "!demo-app/gralde/**"
+      - "!demo-app/graldew.bat"
 env:
   JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
   GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle.version || 'wrapper' }}
-  PROJECT_DIR: 'native-image'
+  PROJECT_DIR: 'demo-app'
 jobs:
   build-and-test:
     name: Build and Test

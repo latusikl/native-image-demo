@@ -12,10 +12,15 @@ on:
         required: false
         default: '21'
         type: string
+      project:
+        description: 'Name of the project that corresponds to directory and JAR file name'
+        required: false
+        default: 'demo-app'
+        type: string
 env:
   JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
-  GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle.version || 'wrapper' }}
-  PROJECT_DIR: 'native-image'
+  GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle-version || 'wrapper' }}
+  PROJECT: ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'demo-app' }}
 jobs:
   build-jar:
     name: Build JAR from the application
@@ -25,7 +30,7 @@ jobs:
         run:  | 
           echo "Java Version: $JAVA_VERSION"
           echo "Gradle Version: $GRADLE_VERSION"
-          echo "Project dir: $PROJECT_DIR"
+          echo "Project dir: $PROJECT"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up JDK ${{ env.JAVA_VERSION }}
@@ -38,12 +43,12 @@ jobs:
         with:
             gradle-version: ${{ env.GRADLE_VERSION }}
             arguments: bootJar --no-daemon
-            build-root-directory: ${{ env.PROJECT_DIR }}
+            build-root-directory: ${{ env.PROJECT }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
-        with:
+        with: ${{ env.PROJECT }}
           name: native-image.jar
-          path: ${{ env.PROJECT_DIR }}/build/libs/native-image.jar
+          path: ${{ env.PROJECT }}/build/libs/${{ env.PROJECT }}.jar
           if-no-files-found: error
           retention-days: 5
           
