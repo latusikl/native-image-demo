@@ -53,11 +53,11 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
             gradle-version: ${{ env.GRADLE_VERSION }}
-            arguments: build -x test
+            arguments: build -x test --no-daemon
             build-root-directory: ${{ env.PROJECT_DIR }}
       - name: Run tests
         uses: gradle/gradle-build-action@v2
         with:
             gradle-version: ${{ env.GRADLE_VERSION }}
-            arguments: test
+            arguments: test --no-daemon
             build-root-directory: ${{ env.PROJECT_DIR }}
