@@ -1,0 +1,65 @@
+name: Build JAR
+on:
+  workflow_dispatch:
+    inputs:
+      gradle-version:
+        description: 'Gradle version that will be used during the build'
+        required: false
+        default: 'wrapper'
+        type: string
+      java-version:
+        description: 'Java version that will be used during the build'
+        required: false
+        default: '21'
+        type: string
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - develop
+      - feature/*
+    paths:
+      - ".github/workflows/build-test-gradle-jar.yaml"
+      -  "native-image/**"
+      - "!native-image/README.md"
+      - "!native-image/gralde/**"
+      - "!native-image/graldew.bat"
+env:
+  JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
+  GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle.version || 'wrapper' }}
+  PROJECT_DIR: 'native-image'
+jobs:
+  build-jar:
+    name: Build JAR from the application
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Environment Setup
+        run:  | 
+          echo "Java Version: $JAVA_VERSION"
+          echo "Gradle Version: $GRADLE_VERSION"
+          echo "Project dir: $PROJECT_DIR"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+      - name: Build Artifact
+        uses: gradle/gradle-build-action@v2
+        with:
+            gradle-version: ${{ env.GRADLE_VERSION }}
+            arguments: bootJar
+            build-root-directory: ${{ env.PROJECT_DIR }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-image.jar
+          path: build/libs/native-image.jar
+          if-no-files-found: error
+          retention-days: 5
+          
