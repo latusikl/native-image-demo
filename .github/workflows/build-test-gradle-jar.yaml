@@ -4,12 +4,12 @@ on:
     inputs:
       gradle-version:
         description: 'Gradle version that will be used during the build'
-        required: false
+        required: true
         default: 'wrapper'
         type: string
       java-version:
         description: 'Java version that will be used during the build'
-        required: false
+        required: true
         default: '21'
         type: string
   pull_request:
