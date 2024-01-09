@@ -23,7 +23,7 @@ on:
       - develop
       - feature/*
     paths:
-      - ".github/workflows/build-test-gradle-jar.yaml"
+      - ".github/workflows/build-jar.yaml"
       -  "native-image/**"
       - "!native-image/README.md"
       - "!native-image/gralde/**"
