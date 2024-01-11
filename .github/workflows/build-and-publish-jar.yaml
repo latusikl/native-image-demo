@@ -55,7 +55,7 @@ jobs:
             gradle-version: ${{ env.GRADLE_VERSION }}
             arguments: bootJar --no-daemon
             build-root-directory: ${{ env.PROJECT }}
-      - name: Publish JAR as Artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PROJECT }}.jar
