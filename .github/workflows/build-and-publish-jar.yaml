@@ -8,17 +8,17 @@ on:
         default: false
         type: boolean
       gradle-version:
-        description: 'Gradle version that will be used during the build'
+        description: 'Gradle version'
         required: true
         default: 'wrapper'
         type: string
       java-version:
-        description: 'Java version that will be used during the build'
+        description: 'Java version'
         required: true
         default: '21'
         type: string
       project:
-        description: 'Name of the project that corresponds to directory and JAR file name'
+        description: 'Project name (also used as JAR name)'
         required: true
         default: 'demo-app'
         type: string
