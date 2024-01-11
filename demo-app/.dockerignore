@@ -1,0 +1,16 @@
+# Ignore everything
+*
+
+# Allow files and directories
+!/build/libs/**
+
+#Additional
+.gradle
+Dockerfile
+gradle
+gradlew.bat
+*.iml
+.idea
+.settings
+.DS_STORE
+.git
