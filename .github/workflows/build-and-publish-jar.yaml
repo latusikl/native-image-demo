@@ -18,7 +18,7 @@ on:
         default: 'demo-app'
         type: string
       skipDockerBuild:
-        description: 'Skip build of Docker Image only JAR file will be published'
+        description: 'Skip Docker Image build'
         required: true
         default: false
         type: boolean
