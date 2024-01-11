@@ -2,6 +2,11 @@ name: Build JAR and Docker image
 on:
   workflow_dispatch:
     inputs:
+      skipDockerBuild:
+        description: 'Skip Docker Image build'
+        required: true
+        default: false
+        type: boolean
       gradle-version:
         description: 'Gradle version that will be used during the build'
         required: true
@@ -17,11 +22,6 @@ on:
         required: true
         default: 'demo-app'
         type: string
-      skipDockerBuild:
-        description: 'Skip Docker Image build'
-        required: true
-        default: false
-        type: boolean
 env:
   JAVA_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.java-version || '21' }}
   GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle-version || 'wrapper' }}
