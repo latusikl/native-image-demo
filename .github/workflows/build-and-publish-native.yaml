@@ -1,24 +1,32 @@
-name: Build Native Image
+name: Build Native Image and Docker Image
 on:
   workflow_dispatch:
     inputs:
+      skipDockerBuild:
+          description: 'Skip Docker Image build'
+          required: true
+          default: false
+          type: boolean
       graal-distro:
-        description: 'GraalVM distribution version'
+        description: 'GraalVM distro'
         required: true
         default: 'graalvm-community'
-        type: string
+        type: choice
+        options:
+          - 'graalvm-community'
+          - 'graalvm'
       java-version:
-        description: 'Java version that will be used during the build'
+        description: 'Java version'
         required: true
         default: '21'
         type: string
       project:
-        description: 'Name of the project that corresponds to directory and JAR file name'
+        description: 'Project name (also used as native-image name)'
         required: true
         default: 'demo-app'
         type: string
       gradle-version:
-        description: 'Gradle version that will be used during the build'
+        description: 'Gradle version'
         required: true
         default: 'wrapper'
         type: string
@@ -27,6 +35,8 @@ env:
   GRAAL_DISTRO: ${{ github.event_name == 'workflow_dispatch' && inputs.graal-distro || 'graalvm-community' }}
   PROJECT: ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'demo-app' }}
   GRADLE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.gradle-version || 'wrapper' }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'demo-app' }}
 jobs:
   build-native:
     name: Build GraalVM Native Image on ${{ matrix.os }}
@@ -63,3 +73,25 @@ jobs:
           path: ${{ env.PROJECT }}/build/native/nativeCompile/${{ env.PROJECT }}
           if-no-files-found: error
             
+      - name: Docker login
+        if: inputs.skipDockerBuild == false && matrix.os == 'ubuntu-latest'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata for Docker
+        if: inputs.skipDockerBuild == false && matrix.os == 'ubuntu-latest'
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image
+        if: inputs.skipDockerBuild == false && matrix.os == 'ubuntu-latest'
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ env.PROJECT }}
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/demo-app:native-image
+          labels: ${{ steps.meta.outputs.labels }}
+          file: ${{ env.PROJECT }}/native-build.Dockerfile
