@@ -32,11 +32,10 @@ jobs:
   build-jar:
     name: Build JAR from the application
     runs-on: ubuntu-latest
-    
     permissions:
       contents: read
-      packages: write
-      
+      packages: write     
+    
     steps:
       - name: Environment setup
         run:  | 
@@ -71,7 +70,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata for Docker
         if: inputs.skipDockerBuild == false
         id: meta
         uses: docker/metadata-action@v5
@@ -83,6 +82,6 @@ jobs:
         with:
           context: ${{ env.PROJECT }}
           push: true
-          tags: jar
+          tags: ghcr.io/${{ github.repository_owner }}/demo-app:jar
           labels: ${{ steps.meta.outputs.labels }}
           file: ${{ env.PROJECT }}/jar-build.Dockerfile
