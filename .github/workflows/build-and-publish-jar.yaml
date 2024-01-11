@@ -1,4 +1,4 @@
-name: Build JAR and publish Docker image
+name: Build JAR and Docker image
 on:
   workflow_dispatch:
     inputs:
