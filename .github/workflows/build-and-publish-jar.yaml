@@ -79,3 +79,4 @@ jobs:
           push: true
           tags: jar
           labels: ${{ steps.meta.outputs.labels }}
+          file: jar-build.Dockerfile
