@@ -32,6 +32,11 @@ jobs:
   build-jar:
     name: Build JAR from the application
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+      
     steps:
       - name: Environment setup
         run:  | 
@@ -58,6 +63,7 @@ jobs:
           path: ${{ env.PROJECT }}/build/libs/${{ env.PROJECT }}.jar
           if-no-files-found: error
           # retention-days: 5
+          
       - name: Docker login
         if: inputs.skipDockerBuild == false
         uses: docker/login-action@v3
