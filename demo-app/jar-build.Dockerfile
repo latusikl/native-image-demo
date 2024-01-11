@@ -1,6 +1,6 @@
 FROM sapmachine:21-jre-headless-ubuntu-22.04
 
-LABEL description="Image for demo application"
+LABEL description="Image for demo application deployed as JAR"
 LABEL maintainer=latusikl@gmail.com
 
 ARG USER="latusikl"
