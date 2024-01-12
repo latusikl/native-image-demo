@@ -20,6 +20,6 @@ RUN     addgroup --system $USER \
                 && mkdir $APP_DIR
 USER $USER
 WORKDIR $APP_DIR
-COPY build/libs/demo-app /opt/demo-app
+COPY /build/native/nativeCompile/demo-app /opt/demo-app
 
-CMD ["/opt/demo-app/demo-app"]
+ENTRYPOINT ["/opt/demo-app/demo-app"]
