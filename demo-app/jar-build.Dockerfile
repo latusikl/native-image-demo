@@ -22,4 +22,5 @@ USER $USER
 WORKDIR $APP_DIR
 COPY build/libs/$JAR_NAME $APP_DIR
 
-CMD ["java","-jar","/opt/demo-app/demo-app.jar"]
+ENTRYPOINT ["java"]
+CMD ["-jar","/opt/demo-app/demo-app.jar"]
