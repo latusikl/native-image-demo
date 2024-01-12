@@ -41,6 +41,9 @@ jobs:
   build-native:
     name: Build GraalVM Native Image on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      packages: write     
     strategy: 
       matrix:
         os: [macos-latest, ubuntu-latest]
