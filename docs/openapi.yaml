@@ -75,8 +75,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ItemDto"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: CREATED
           headers:
             Location:
               description: URL with resource location
@@ -150,8 +150,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ItemStock4PostDto"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: CREATED
           headers:
             Location:
               description: URL with resource location
@@ -226,8 +226,8 @@ paths:
             schema:
               $ref: "#/components/schemas/MemberDto"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: CREATED
           headers:
             Location:
               description: URL with resource location
@@ -302,8 +302,8 @@ paths:
             schema:
               $ref: "#/components/schemas/Borrow4PostDto"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: CREATED
           headers:
             Location:
               description: URL with resource location
