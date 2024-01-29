@@ -1,0 +1,21 @@
+{
+  "name": "k6-test-types",
+  "version": "1.0.0",
+  "description": "Provide K6 types definition for better dev experience",
+  "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/latusikl/native-image-demo.git"
+  },
+  "author": "Lukasz Latusik",
+  "license": "ISC",
+  "homepage": "https://github.com/latusikl/native-image-demo#readme",
+  "devDependencies": {
+    "@types/k6": "^0.48.0",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
