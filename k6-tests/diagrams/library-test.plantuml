@@ -1,0 +1,60 @@
+@startuml library-test
+skinparam sequenceArrowThickness 2
+skinparam responseMessageBelowArrow true
+hide footbox
+
+title Sequence Diagram For The Library Test
+
+participant exec[
+    = Test Executor
+    ----
+    K6 Virtual User
+]
+
+participant sut [
+    = System Under Test
+    ----
+    Demo Application
+]
+
+activate exec
+
+activate sut
+
+exec -> sut: Create Book \n<color:gray>POST /api/items</color>
+sut --> exec: <color:gray>CREATED</color>
+
+exec -> sut: Add Book Stock \n<color:gray>POST /api/stocks</color>
+sut --> exec: <color:gray>CREATED</color>
+
+exec -> sut: Create Library Member \n<color:gray>POST /api/members</color>
+sut --> exec: <color:gray>CREATED</color>
+
+exec -> sut: Check Book Available\n<color:gray>GET /api/stocks/{id}</color>
+sut --> exec: <color:gray>OK</color>
+
+exec -> sut: Borrow Book\n<color:gray>POST /api/borrowings/{id}</color>
+sut --> exec: <color:gray>OK</color>
+
+exec -> sut: Check Stock Updated\n<color:gray>GET /api/stocks/{id}</color>
+sut --> exec: <color:gray>OK</color>
+
+exec -> sut: Return Book\n<color:gray>DELETE /api/borrowings/{id}</color>
+sut --> exec: <color:gray>NO CONTENT</color>
+
+exec -> sut: Check Stock Updated\n<color:gray>GET /api/stocks/{id}</color>
+sut --> exec: <color:gray>OK</color>
+
+exec -> sut: Remove Book Stock \n<color:gray>DELETE /api/stocks/{id}</color>
+sut --> exec: <color:gray>NO_CONTENT</color>
+
+exec -> sut: Remove Book\n<color:gray>DELETE /api/items/{id}</color>
+sut --> exec: <color:gray>NO_CONTENT</color>
+
+exec -> sut: Remove Member\n<color:gray>DELETE /api/members/{id}</color>
+sut --> exec: <color:gray>NO_CONTENT</color>
+
+exec -> sut: Check Member Not Exist \n<color:gray>GET /api/members/{id}</color>
+sut --> exec: <color:gray>NOT_FOUND</color>
+
+@enduml
