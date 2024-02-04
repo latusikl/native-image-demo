@@ -28,4 +28,4 @@ jobs:
         commit_message: Update UML diagrams
         commit_user_name: 'github-actions-uml[bot]'
         commit_user_email: 'latusikl@latusikl.com'
-        change_paths: '*.png'
+        file_pattern: '*.png'
