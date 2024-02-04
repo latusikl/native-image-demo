@@ -1,0 +1,27 @@
+@startuml library-test
+skinparam sequenceArrowThickness 2
+skinparam responseMessageBelowArrow true
+hide footbox
+
+title Sequence Diagram For The Library Test
+
+participant exec[
+    = Test Executor
+    ----
+    K6 Virtual User
+]
+
+participant sut [
+    = System Under Test
+    ----
+    Demo Application
+]
+
+
+
+exec <- exec: Generate\nTest Data
+exec <- exec: Sort Test Data\nFor Verification
+
+
+
+@enduml
