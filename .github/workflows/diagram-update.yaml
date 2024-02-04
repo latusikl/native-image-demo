@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    steps:
-    
+    steps:    
       - name: Checkout repository
         uses: actions/checkout@v2
       - uses: actions/setup-java@v4
@@ -21,13 +20,13 @@ jobs:
       - name: Download Plantuml
         run: wget https://github.com/plantuml/plantuml/releases/download/v1.2024.0/plantuml-1.2024.0.jar
       - name: Generate Diagrams
-        run: java -jar plantuml-1.2024.0.jar -v -tpng -r  **/k6-tests/diagrams/*.plantuml
+        run: java -jar plantuml-1.2024.0.jar -v -tpng k6-tests/diagrams/*.plantuml
       - name: Test LS
         run: cd k6-tests/diagrams && ls
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update UML diagrams
-          commit_user_name: 'github-actions-uml[bot]'
+          commit_user_name: 'github-actions-uml-bot'
           commit_user_email: 'latusikl@latusikl.com'
-          file_pattern: '*.png'
+          file_pattern: 'k6-tests/diagrams/*.png'
