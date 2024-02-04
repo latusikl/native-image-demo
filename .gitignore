@@ -5,6 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+k6-tests/diagrams/*.png
+
 ### STS ###
 .apt_generated
 .classpath
