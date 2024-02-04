@@ -13,13 +13,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Process diagrams
+        uses: Timmy/plantuml-action@v1
+        with:
+          args: 'k6-tests/diagrams/*.plantuml -tpng'
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        fetch-depth: 1
-    - name: plantuml
-      id: plantuml
-      uses: grassedge/generate-plantuml-action@v1.5
-      with:
-        path: example
-        message: "Render PlantUML files"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        commit_message: Update UML diagrams
+        commit_user_name: 'github-actions-uml[bot]'
+        commit_user_email: 'latusikl@latusikl.com'
+        file_pattern: '*.png'
