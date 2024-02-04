@@ -6,21 +6,21 @@ on:
   workflow_dispatch:
 jobs:
   build-diagrams:
-    name: Build *.png file from diagrams
+    name: Build diagram PNG
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Process diagrams
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Process diagrams
         uses: Timmy/plantuml-action@v1
         with:
           args: 'k6-tests/diagrams/*.plantuml -tpng'
-    - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Update UML diagrams
-        commit_user_name: 'github-actions-uml[bot]'
-        commit_user_email: 'latusikl@latusikl.com'
-        file_pattern: '*.png'
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update UML diagrams
+          commit_user_name: 'github-actions-uml[bot]'
+          commit_user_email: 'latusikl@latusikl.com'
+          file_pattern: '*.png'
