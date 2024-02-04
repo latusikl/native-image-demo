@@ -46,7 +46,7 @@ check_arg_value(){
 }
 
 #Script Content
-check_if_installed k6 "You need to have K6 installed to run tests"
+check_if_installed k6 "See instalation guide: https://k6.io/docs/get-started/installation"
 check_for_args 1 $# "./runTest <TEST_NAME>"
 check_arg_value $1
 
