@@ -20,9 +20,7 @@ jobs:
       - name: Download Plantuml
         run: wget https://github.com/plantuml/plantuml/releases/download/v1.2024.0/plantuml-1.2024.0.jar
       - name: Generate Diagrams
-        run: java -jar plantuml-1.2024.0.jar -v -tpng k6-tests/diagrams/*.plantuml
-      - name: Test LS
-        run: cd k6-tests/diagrams && ls
+        run: java -jar plantuml-1.2024.0.jar -v -tpng -o generated k6-tests/diagrams/*.plantuml
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
