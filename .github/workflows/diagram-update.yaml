@@ -24,9 +24,9 @@ jobs:
       - name: Test LS
         run: cd k6-tests/diagrams && ls
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: EndBug/add-and-commit@v9
         with:
-          commit_message: Update UML diagrams
-          commit_user_name: 'github-actions-uml-bot'
-          commit_user_email: 'latusikl@latusikl.com'
-          file_pattern: 'k6-tests/diagrams/*.png'
+          author_name: Github Action Bot
+          author_email: bot@noreply.com
+          message: 'Generate PNG for diagrams'
+          add: '*.png'
