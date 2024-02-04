@@ -19,7 +19,7 @@ jobs:
         sudo apt install -y plantuml
     - name: Generate diagrams
       run: |
-        for uml in $(find ./k6-tests/diagrams -name "*.puml"); do
+        for uml in $(find ./k6-tests/diagrams -name "*.plantuml"); do
             plantuml $uml -tpng
         done
     - name: Commit changes
