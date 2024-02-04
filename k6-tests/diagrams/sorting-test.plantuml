@@ -1,4 +1,4 @@
-@startuml library-test
+@startuml sorting-test
 skinparam sequenceArrowThickness 2
 skinparam responseMessageBelowArrow true
 hide footbox
