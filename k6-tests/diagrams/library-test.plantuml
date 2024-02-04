@@ -3,7 +3,7 @@ skinparam sequenceArrowThickness 2
 skinparam responseMessageBelowArrow true
 hide footbox
 
-title Sequence Diagram For The Library Test
+title "Sequence Diagram For The Library Test"
 
 participant exec[
     = Test Executor
