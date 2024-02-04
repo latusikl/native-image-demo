@@ -57,4 +57,7 @@ sut --> exec: <color:gray>NO_CONTENT</color>
 exec -> sut: Check Member Not Exist \n<color:gray>GET /api/members/{id}</color>
 sut --> exec: <color:gray>NOT_FOUND</color>
 
+deactivate exec
+deactivate sut
+
 @enduml
