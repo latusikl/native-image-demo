@@ -7,23 +7,11 @@ import {getBaseUrl, sortingRequestBody} from "./utils/utils.js";
 import {ApiPaths, DEFAULT_PARAMS, HttpStatus} from "./utils/constants.js";
 
 export const options = {
-    vus: 1,
-    // duration: '10s',
-    iterations: 1,
-    // scenarios: {
-    //     my_api_scenario: {
-    //         // arbitrary scenario name
-    //         executor: 'ramping-vus',
-    //         startVUs: 0,
-    //         stages: [
-    //             { duration: '5s', target: 100 },
-    //             { duration: '5s', target: 0 },
-    //         ],
-    //         gracefulRampDown: '10s',
-    //         env: { MYVAR: 'example' },
-    //         tags: { my_tag: 'example' },
-    //     },
-    // },
+    stages:[
+        {duration: '15s', target: 250},
+        {duration: '60s', target: 250},
+        {duration: '15s', target: 0}
+    ]
 }
 
 const totalDataExamples = 1000
