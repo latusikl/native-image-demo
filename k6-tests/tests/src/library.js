@@ -1,12 +1,12 @@
-import {ApiPaths, HTTP_HEADER, HttpStatus} from "../api/constants.js";
+import {ApiPaths, HTTP_HEADER, HttpStatus} from "./utils/constants.js";
 import {
     bookStockDto, borrowDto,
     extractUUIDFromResponseHeader,
     getBaseUrl,
     randomisedItemDto,
     randomisedMemberDto
-} from "../api/utils.js";
-import {DEFAULT_PARAMS} from "../api/constants.js";
+} from "./utils/utils.js";
+import {DEFAULT_PARAMS} from "./utils/constants.js";
 import http from 'k6/http';
 import {check, sleep} from 'k6';
 import {randomIntBetween} from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
