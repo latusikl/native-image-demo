@@ -50,4 +50,4 @@ check_if_installed k6 "See instalation guide: https://k6.io/docs/get-started/ins
 check_for_args 1 $# "./runTest <TEST_NAME>"
 check_arg_value $1
 
-k6 run ./k6-tests/src/tests/$1
+k6 run ./k6-tests/tests/src/$1

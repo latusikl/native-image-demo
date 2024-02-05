@@ -1,4 +1,4 @@
-import {ApiPaths, BodyContent, ContentType, HTTP_HEADER, HttpStatus, SLEEP_TIME} from "../api/constants.js";
+import {ApiPaths, HTTP_HEADER, HttpStatus} from "../api/constants.js";
 import {
     bookStockDto, borrowDto,
     extractUUIDFromResponseHeader,
