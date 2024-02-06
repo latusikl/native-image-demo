@@ -2,6 +2,7 @@ package pl.latusikl.demo.app.library.controler;
 
 import java.util.UUID;
 
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import pl.latusikl.demo.app.library.service.ItemBorrowService;
 
 @RestController
 @RequestMapping("/borrowings")
+@RegisterReflectionForBinding(ItemBorrowDto.class)
 public class ItemBorrowController extends AbstractCRUDController<ItemBorrow, ItemBorrowDto>
 {
 	private final ItemBorrowService itemBorrowService;

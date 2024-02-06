@@ -8,9 +8,9 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.latusikl.demo.app.exception.InternalServerErrorException;
 import pl.latusikl.demo.app.library.dto.BaseDto;
 import pl.latusikl.demo.app.library.entity.BaseEntity;
-import pl.latusikl.demo.app.exception.InternalServerErrorException;
 
 public abstract class AbstractEntityService<ENTITY extends BaseEntity, DTO extends BaseDto> implements CRUDService<ENTITY, DTO>
 {
