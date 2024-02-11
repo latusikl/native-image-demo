@@ -22,6 +22,18 @@ export const HttpStatus = {
 export const HTTP_HEADER = {
     LOCATION: 'Location'
 }
+export function defaultParamsWithTag(tag){
+    return {
+        headers:{
+            'Content-Type': ContentType.APPLICATION_JSON,
+            'Accept': ContentType.APPLICATION_JSON
+        },
+        responseType: 'text',
+        tags: {
+            test_tag: tag
+        }
+    }
+}
 
 export const DEFAULT_PARAMS = {
     headers:{

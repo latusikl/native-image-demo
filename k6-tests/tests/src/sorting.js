@@ -8,9 +8,9 @@ import {ApiPaths, DEFAULT_PARAMS, HttpStatus} from "./utils/constants.js";
 
 export const options = {
     stages:[
-        {duration: '15s', target: 250},
-        {duration: '60s', target: 250},
-        {duration: '15s', target: 0}
+        {duration: '20s', target: 100},
+        {duration: '40s', target: 100},
+        {duration: '20s', target: 0}
     ]
 }
 
