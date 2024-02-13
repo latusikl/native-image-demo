@@ -38,3 +38,10 @@ out/
 
 node_modules
 .DS_STORE
+
+
+demo/app/
+demo/demo-app-machine.pem
+demo/demo-res/
+demo/demo.properties
+demo/scripts/
