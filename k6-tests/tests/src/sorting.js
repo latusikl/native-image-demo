@@ -8,13 +8,13 @@ import {ApiPaths, DEFAULT_PARAMS, HttpStatus} from "./utils/constants.js";
 
 export const options = {
     stages:[
-        {duration: '20s', target: 100},
-        {duration: '40s', target: 100},
+        {duration: '20s', target: 1000},
+        {duration: '40s', target: 1000},
         {duration: '20s', target: 0}
     ]
 }
 
-const totalDataExamples = 1000
+const totalDataExamples = 10
 const dataSetArray = new SharedArray('Sorting Test Data Set', () => JSON.parse(open('./sorting-data.json')))
 
 export function setup() {
