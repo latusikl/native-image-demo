@@ -95,4 +95,8 @@ public class MaxIntHeap {
 		}
 	}
 
+	protected int[] getItems()
+	{
+		return items;
+	}
 }
