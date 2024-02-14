@@ -3,7 +3,6 @@ skinparam sequenceArrowThickness 2
 skinparam responseMessageBelowArrow true
 hide footbox
 
-
 participant exec[
     = Test Executor
     ----
@@ -16,11 +15,7 @@ participant sut [
     Demo Application
 ]
 
-
-
-exec <- exec: Generate\nTest Data
-exec <- exec: Sort Test Data\nFor Verification
-
-
+exec -> sut: Sort Data \n<color:gray>POST /api/sort/sorters</color>
+sut --> exec: <color:gray>OK</color>\nArray of sorted data
 
 @enduml
